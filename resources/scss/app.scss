@@ -4,12 +4,8 @@ a {
     text-decoration: none;
 }
 
-.project-img,
-.preview {
+.project-img > img,
+#file-image-preview {
     height: 400px;
-
-    img {
-        height: 100%;
-    }
 }
 

@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Type;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
+use Illuminate\Support\Facades\Storage;
+use illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -15,7 +18,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+    $types = Type::all();
+    
+    return view("admin.type.index", compact("types"));
     }
 
     /**
@@ -25,7 +30,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.type.create");
     }
 
     /**
@@ -36,7 +41,13 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $newType = new Type();
+        $newType->fill($data);
+        $newType->save();
+
+        return to_route("admin.types.show", $newType->id)->with("message", "Type created successfully");
     }
 
     /**
@@ -47,7 +58,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return view("admin.type.show", compact("type"));
     }
 
     /**
@@ -58,7 +69,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view("admin.type.edit", compact("type"));
     }
 
     /**
@@ -70,7 +81,10 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $data = $request->validated();
+        $type->update($data);
+
+        return  to_route("admin.types.index")->with('message', "Type $type->id updated successfully");
     }
 
     /**
@@ -81,6 +95,9 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $old_id = $type->id;
+        
+        $type->delete();
+        return  to_route("admin.types.index")->with('message', "Type $type->id cancelled successfully");
     }
 }

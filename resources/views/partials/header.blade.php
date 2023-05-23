@@ -15,8 +15,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <li class="nav-item d-flex">
                     <a class="nav-link" href="{{ route("homepage") }}">{{ __('Home') }}</a>
+                    <a class="nav-link" href="{{ route("admin.projects.index") }}">{{ __('Projects') }}</a>
+                    <a class="nav-link" href="{{ route("admin.types.index") }}">{{ __('Project Types') }}</a>
                 </li>
             </ul>
 

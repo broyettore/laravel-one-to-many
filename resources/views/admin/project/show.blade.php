@@ -4,9 +4,14 @@
 <div class="container py-4">
     @include('partials.message')
     <h2 class="mb-3">Project: {{ $project->name }}</h2>
+    @if ($project->type_id)
+        <h3 class="mb-3">Type: {{ $project->type->name }}</h3>
+    @endif
+    @if ($project->image)
     <div class="project-img mb-3">
         <img src=" {{ asset("storage/" . $project->image) }}" alt="{{ $project->name }}">
-    </div>
+    </div>  
+    @endif
     <div class="project_content mb-3">
         <ul class="list-group">
             <li class="list-group-item">Description :{{ $project->description }}</li>

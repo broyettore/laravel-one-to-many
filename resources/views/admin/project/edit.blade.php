@@ -20,7 +20,7 @@
         <input type="text" class="form-control" id="client" name="client" value="{{ old('client', $project->client) }}">
     </div>
     <div class="mb-3">
-        <label for="start" class="form-label">Starting Dtae</label>
+        <label for="start" class="form-label">Starting Date</label>
         <input type="date" class="form-control" id="start" name="start" value="{{ old('start', $project->start) }}">
     </div>
     <div class="mb-3">
@@ -46,6 +46,15 @@
 
         <label for="image" class="form-label">Image</label>
         <input class="form-control" type="file" id="image" name="image">
+    </div>
+    <div class="mb-3">
+        <label for="type_id" class="form-label">Project's Type</label>
+        <select class="form-select" aria-label="Default select example" name="type_id" id="type_id">
+            <option value="">Select Project's Type</option>
+            @foreach ($types as $type)
+            <option value="{{ old('type_id', $type->id) }}" {{ old("type_id") == $type->id ? "selected" : ""  }}>{{ $type->name }}</option>        
+            @endforeach
+          </select>
     </div>
     <div class="mb-3">
         <input type="submit" value="submit" class="btn btn-primary">
